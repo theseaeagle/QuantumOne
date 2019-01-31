@@ -50,11 +50,10 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
-  console.log("You launched the app!");
-  response.say("Hello! You just launched the app! Nice Job Boi!");
+  console.log("Quantum One Launched");
+  response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-app.dictionary = { "names": ["david", "sylvia", "didi", "daniel", "michael", "stephanie", "tom"] };
 
 app.intent("nameIntent", {
     "slots": { "NAME": "LITERAL" },
