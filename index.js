@@ -21,7 +21,7 @@ express_app.set("view engine", "ejs");
 
 //Database
 var fs = require('fs');
-var dbFile = './.data/sqlite1.db';
+var dbFile = 'data/sqlite.db';
 var exists = fs.existsSync(dbFile);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbFile);
