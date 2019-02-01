@@ -57,7 +57,7 @@ app.launch(function(request, response) {
         response.say("Hello Boi");
         console.log("Done");
         // Use user details from here
-        console.log(userDetails)
+        //console.log(userDetails)
     }, function(err) {
         console.log(err);
     })
