@@ -2,6 +2,7 @@ var express = require("express");
 var alexa = require("alexa-app");
 var rp = require('request-promise');
 var unirest = require('unirest');
+var USER_INFO_URL = 'https://quantumone.eu.auth0.com/userinfo/';
 var PORT = process.env.PORT || 3000;
 //var app = express();
 var express_app = express();
@@ -80,10 +81,8 @@ app.launch(function(request, response) {
     return new Promise(function(resolve, reject) {
      // Do async job
       var accessToken = request.sessionDetails.user.accessToken;
-      //let accessToken = session.accessToken;
-      //console.log(JSON.stringify(request));
       console.log("access token: " + accessToken );
-      unirest.get('https://quantumone.eu.auth0.com/userinfo/')
+      unirest.get(USER_INFO_URL)
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
       .send()
       .end(function (response) {
