@@ -65,34 +65,32 @@ app.launch(function(request, response) {
 //    })
 //    
     
-    var accessToken = request.sessionDetails.user.accessToken;
-  var options = {
-      method: 'GET',
-      url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
-      // Advanced Settings --> Endpoints --> OAuth User Info URL
-      headers:{
-          authorization: 'Bearer ' + accessToken,
-      },
-      json: true // Automatically parses the JSON string in the response
-  };
-  
-  // Return new promise 
+//    var accessToken = request.sessionDetails.user.accessToken;
+//  var options = {
+//      method: 'GET',
+//      url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
+//      // Advanced Settings --> Endpoints --> OAuth User Info URL
+//      headers:{
+//          authorization: 'Bearer ' + accessToken,
+//      },
+//      json: true // Automatically parses the JSON string in the response
+//  };
+//  
+//  // Return new promise 
     return new Promise(function(resolve, reject) {
      // Do async job
-    
-       rp(options)
-        .then(function (user) {
-            console.log('User is: %d ', user.email);
-            response.say("Grrrrrrrrrrrrrrrrrrrrr"); // Output: Kaan Kilic, email@jovo.tech
-            resolve(user.email);
-            
-        })
-        .catch(function (err) {
-            // API call failed...
-            console.log('Request Failed');
-            //response.say('Uh Oh! Something went wrong');
-            reject(err);
-        });
+      var accessToken = request.sessionDetails.user.accessToken;
+      //let accessToken = session.accessToken;
+      //console.log(JSON.stringify(request));
+      console.log("access token: " + accessToken );
+      unirest.get('https://quantumone.eu.auth0.com/userinfo/')
+      .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
+      .send()
+      .end(function (response) {
+        console.log(response.body);
+        //resolve(response.body.nickname);
+        return response.body.nickname;
+      });
         
     })
     
