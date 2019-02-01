@@ -72,7 +72,7 @@ app.launch(function(request, response) {
  //   })
         
 
-    var launchPromise = gettheUser2(request);
+    var launchPromise = getUser2(request);
     launchPromise.then(function(result) {
         console.log("Done");
         response.say("Hello Boi");
