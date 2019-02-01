@@ -204,8 +204,20 @@ app.intent("lock", {
       })();
   
   
-    response.say("Lock Command Sent");
-  response.shouldEndSession(false);
+   // response.say("Lock Command Sent");
+  var accessToken = request.sessionDetails.user.accessToken;
+  //let accessToken = session.accessToken;
+  //console.log(JSON.stringify(request));
+  console.log("access token: " + accessToken );
+  unirest.get('https://quantumone.eu.auth0.com/userinfo/')
+  .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
+  .send()
+  .end(function (response) {
+    console.log(response.body);
+    //resolve(response.body.nickname);
+    response.say("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
+    //return response.body.nickname;
+  });
   }
 );
 
