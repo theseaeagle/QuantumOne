@@ -85,10 +85,10 @@ app.launch(function(request, response) {
       unirest.get(USER_INFO_URL)
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
       .send()
-      .end(function (response) {
-        console.log(response.body);
+      .end(function (result) {
+        console.log(result.body);
         //resolve(response.body.nickname);
-        response.say(response.body.nickname);
+        response.say(result.body.nickname);
         resolve(response.body.nickname);
       });
         
