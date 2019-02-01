@@ -1,6 +1,6 @@
 var express = require("express");
 var alexa = require("alexa-app");
-
+var rp = require('request-promise');
 var PORT = process.env.PORT || 3000;
 //var app = express();
 var express_app = express();
@@ -60,23 +60,26 @@ app.launch(function(request, response) {
 function launch(request){
   var session = request.getSession()
   let accessToken = session.accessToken;
+  let token = this.$request.getAccessToken();
+  let options = {
+      method: 'GET',
+      url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
+                                                   // Advanced Settings --> Endpoints --> OAuth User Info URL
+      headers:{
+          authorization: 'Bearer ' + accessToken,
+      },
+      json: true // Automatically parses the JSON string in the response
+  };
   
-  let getUser = (accessToken, userid) => {
-          request({
-              url: 'https://quantumone.eu.auth0.com/userinfo',
-              headers: {
-                  authorization: 'Bearer ' + token
-              }
-          });
-    }
-  console.log(getUser);
-     
-    let data = JSON.parse(getUser);
-    /*
-    To see how the user data was stored,
-    go to Auth -> Users -> Click on the user you authenticated earlier -> Raw JSON
-    */
-    this.tell(data.name + ', ' + data.email); // Output: Kaan Kilic, email@jovo.tech
+    rp(options)
+        .then(function (user) {
+         //console.log('User has %d repos', repos.length);
+         response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
+    })
+        .catch(function (err) {
+        // API call failed...
+        response.say('Uh Oh! Something went wrong');
+    });
 }
 
 
