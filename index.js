@@ -51,7 +51,7 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
   
-  launch();
+  await launch();
   
   console.log("Quantum One Launched");
   response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
@@ -69,7 +69,7 @@ async function launch(){
             }
         };
 
-       rp(options).then((body) => {
+       await rp(options).then((body) => {
             let data = JSON.parse(body);
             /*
             To see how the user data was stored,
