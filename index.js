@@ -61,6 +61,16 @@ async function getuser(request,response) {
     var a = await launch(request,response); // a is 5
 }
 
+(async() => {
+  const [ profile, token ] = await Promise.all([
+    profileHelper.getUserData(username),
+    tokenHelper.getUserToken(username)
+  ]);
+
+  return { profile, token };
+})();
+
+
 function launch(request,response){
   //response.say('Function Launched');
   var session = request.getSession();
