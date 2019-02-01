@@ -51,7 +51,7 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
- launch();
+ launch(request, response);
 });
 
 
