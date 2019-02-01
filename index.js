@@ -49,7 +49,7 @@ db.serialize(function(){
 
 //End Database
 
-async app.launch(function(request, response) {
+app.launch(function(request, response) {
   
   launch();
   
