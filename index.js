@@ -191,7 +191,20 @@ app.intent("lock", {
     db.serialize(function() {
         db.run('UPDATE Dreams SET  dream= "lock", time=strftime("%s","now") WHERE id=1');
       });
+  
+  
+   (async() => {
+        const [ nickname ] = await Promise.all([
+          gettheUser(request)
+        ]);
+         console.log("Quantum One Launched");
+         response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+         response.shouldEndSession(true);
+      })();
+  
+  
     response.say("Lock Command Sent");
+  response.shouldEndSession(false);
   }
 );
 
