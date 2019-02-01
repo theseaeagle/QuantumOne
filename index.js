@@ -151,7 +151,7 @@ app.intent("nameIntent", {
     
 );
 
-app.intent("command", {
+app.intent("runcommand", {
     "slots": { "parameter": "LITERAL"},
     "utterances": [
       "run {parameter}"
@@ -162,11 +162,121 @@ app.intent("command", {
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "command", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+        db.run('UPDATE Dreams SET  dream= "runcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
       });
-    response.say("Command is, "+ parameter);
+    response.say("Run Command is, "+ parameter);
   }
 );
+
+
+app.intent("opencommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "open {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "opencommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Open Command is, "+ parameter);
+  }
+);
+
+
+app.intent("closecommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "close {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "closecommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Close Command is, "+ parameter);
+  }
+);
+
+
+
+app.intent("findcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "find {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "findcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Find Command is, "+ parameter);
+  }
+);
+
+
+app.intent("deletecommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "delete {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "deletecommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Delete Command is, "+ parameter);
+  }
+);
+
+
+app.intent("setcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "set {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Set Command is, "+ parameter);
+  }
+);
+
+
+app.intent("launchcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "launch {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "launchcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Launch Command is, "+ parameter);
+  }
+);
+
 
 
 app.intent("shutdown", {
