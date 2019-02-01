@@ -52,7 +52,7 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
     //launch(request, response);
-    var launchPromise = launch();
+    var launchPromise = launch(request, response);
     launchPromise.then(function(result) {
         response.say("Hello Boi");
         console.log("Done");
