@@ -53,13 +53,16 @@ db.serialize(function(){
 app.launch(function(request, response) {
   
  //var result = await launch(request,response);
-  var nickname = gettheUser(request);
-  console.log("Quantum One Launched");
+ await gettheUser(request).then((nickname) => {
+    console.log("Quantum One Launched");
   response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+    
+  });
+  
 });
 
 
-function gettheUser(request){
+async function gettheUser(request){
   var accessToken = request.sessionDetails.user.accessToken;
   //let accessToken = session.accessToken;
   //console.log(JSON.stringify(request));
