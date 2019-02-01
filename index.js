@@ -60,15 +60,15 @@ app.launch(function(request, response) {
 //   });
   
   
-//   (async() => {
-//     const [ nickname ] = await Promise.all([
-//       gettheUser(request)
-//     ]);
-//      console.log("Quantum One Launched");
-//      response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-//      exit = true;
-//   })();
-  gettheUser(request)
+  (async() => {
+    const [ nickname ] = await Promise.all([
+      nickname = gettheUser(request)
+    ]);
+     console.log("Quantum One Launched");
+     response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+     exit = true;
+  })();
+  //gettheUser(request)
   //do{}while(!exit);
   
   
@@ -85,7 +85,7 @@ function gettheUser(request){
   .send()
   .end(function (response) {
     console.log(response.body);
-    resolve(response.body.nickname);
+    //resolve(response.body.nickname);
     return response.body.nickname;
   });
 }
