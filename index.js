@@ -60,7 +60,6 @@ app.launch(function(request, response) {
 function launch(request){
   var session = request.getSession()
   let accessToken = session.accessToken;
-  let token = this.$request.getAccessToken();
   let options = {
       method: 'GET',
       url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
