@@ -51,10 +51,10 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
   
-  await launch();
+  launch();
   
   console.log("Quantum One Launched");
-  response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
+  //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
 async function launch(){
