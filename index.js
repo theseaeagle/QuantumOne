@@ -52,6 +52,7 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
   var exit = false;
+  var firsttime=true;
  //var result = await launch(request,response);
 //  await gettheUser(request).then((nickname) => {
 //     console.log("Quantum One Launched");
@@ -60,16 +61,22 @@ app.launch(function(request, response) {
 //   });
   
   
-  (async() => {
-    const [ nickname ] = await Promise.all([
-      gettheUser(request)
-    ]);
-     console.log("Quantum One Launched");
-     response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-     exit = true;
-  })();
+
   //gettheUser(request)
-  do{}while(!exit);
+  do{
+    if(firsttime){
+        (async() => {
+        const [ nickname ] = await Promise.all([
+          gettheUser(request)
+        ]);
+         console.log("Quantum One Launched");
+         response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+         exit = true;
+      })();
+      
+    }
+  firsttime=false;
+  }while(!exit);
   
   
 });
