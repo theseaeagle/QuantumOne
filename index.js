@@ -89,7 +89,7 @@ app.launch(function(request, response) {
       .end(function (response) {
         console.log(response.body);
         //resolve(response.body.nickname);
-        return response.body.nickname;
+        response.say(response.body.nickname);
         resolve(response.body.nickname);
       });
         
