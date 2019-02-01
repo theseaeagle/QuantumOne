@@ -60,16 +60,16 @@ app.launch(function(request, response) {
 //   });
   
   
-  (async() => {
-    const [ nickname ] = await Promise.all([
-      gettheUser(request)
-    ]);
-     console.log("Quantum One Launched");
-     response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-     exit = true;
-  })();
+//   (async() => {
+//     const [ nickname ] = await Promise.all([
+//       gettheUser(request)
+//     ]);
+//      console.log("Quantum One Launched");
+//      response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+//      exit = true;
+//   })();
   gettheUser(request)
-  do{}while(!exit);
+  //do{}while(!exit);
   
   
 });
