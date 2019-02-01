@@ -58,14 +58,17 @@ app.launch(function(request, response) {
 //   response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
     
 //   });
+  var exit = false;
   
   (async() => {
   const [ nickname ] = await Promise.all([
     gettheUser(request)
   ]);
    response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+    exit = true;
   })();
   
+  do{}while(!exit);
   
 });
 
