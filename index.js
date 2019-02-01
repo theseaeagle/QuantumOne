@@ -52,33 +52,40 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
-//    //launch(request, response);
-//    var launchPromise = launch(request, response);
-//    launchPromise.then(function(result) {
-//        console.log("Done");
-//        response.say("Hello Boi");
-//        return response.send();
-//        //console.log("Done");
-//        // Use user details from here
-//        //console.log(userDetails)
-//    }, function(err) {
-//        console.log(err);
-//    })
-//    
-    
-//    var accessToken = request.sessionDetails.user.accessToken;
-//  var options = {
-//      method: 'GET',
-//      url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
-//      // Advanced Settings --> Endpoints --> OAuth User Info URL
-//      headers:{
-//          authorization: 'Bearer ' + accessToken,
-//      },
-//      json: true // Automatically parses the JSON string in the response
-//  };
-//  
-//  // Return new promise 
-    return new Promise(function(resolve, reject) {
+    // Return new promise 
+ //   return new Promise(function(resolve, reject) {
+//     // Do async job
+//      var accessToken = request.sessionDetails.user.accessToken;
+//      console.log("access token: " + accessToken );
+//      unirest.get(USER_INFO_URL)
+//      .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
+//      .send()
+//      .end(function (result) {
+//        console.log(result.body.nickname);
+//        //resolve(response.body.nickname);
+//        response.say("Hello" + result.body.nickname);
+//        response.send();
+//        resolve(result.nickname);
+//      });
+        
+        
+ //   })
+        
+
+    var launchPromise = gettheUser2(request);
+    launchPromise.then(function(result) {
+        console.log("Done");
+        response.say("Hello Boi");
+        return response.send();
+    }, function(err) {
+        console.log(err);
+    });       
+});
+
+
+
+function getUser2(request){
+     return new Promise(function(resolve, reject) {
      // Do async job
       var accessToken = request.sessionDetails.user.accessToken;
       console.log("access token: " + accessToken );
@@ -87,15 +94,10 @@ app.launch(function(request, response) {
       .send()
       .end(function (result) {
         console.log(result.body.nickname);
-        //resolve(response.body.nickname);
-        response.say("Hello" + result.body.nickname);
-        response.send();
-        resolve(result.nickname);
+        resolve(result.body.nickname);
       });
-        
-    })
-    
-});
+    });
+}
 
 
 function gettheUser(request){
@@ -106,10 +108,10 @@ function gettheUser(request){
   unirest.get('https://quantumone.eu.auth0.com/userinfo/')
   .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
   .send()
-  .end(function (response) {
-    console.log(response.body);
+  .end(function (result) {
+    console.log(result.body);
     //resolve(response.body.nickname);
-    return response.body.nickname;
+    return result.body.nickname;
   });
 }
 
