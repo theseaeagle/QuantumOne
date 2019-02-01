@@ -57,26 +57,25 @@ app.launch(function(request, response) {
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-async function launch(request){
+function launch(request){
   var session = request.getSession()
-  let token = session.accessToken;
-        let options = {
-            method: 'GET',
-            uri: 'https://quantumone.eu.auth0.com/userinfo', // You can find your URL on Client --> Settings --> 
-            // Advanced Settings --> Endpoints --> OAuth User Info URL
-            headers: {
-                authorization: 'Bearer ' + token,
-            }
-        };
-
-       await rp(options).then((body) => {
-            let data = JSON.parse(body);
-            /*
-            To see how the user data was stored,
-            go to Auth -> Users -> Click on the user you authenticated earlier -> Raw JSON
-            */
-            this.tell(data.name + ', ' + data.email); // Output: Kaan Kilic, email@jovo.tech
-        });
+  let accessToken = session.accessToken;
+  
+  let getUser = (accessToken, userid) => {
+          return requestPromise({
+              url: 'https://quantumone.eu.auth0.com/userinfo',
+              headers: {
+                  authorization: 'Bearer ' + token
+              }
+          });
+    }
+     
+    let data = JSON.parse(getUser);
+    /*
+    To see how the user data was stored,
+    go to Auth -> Users -> Click on the user you authenticated earlier -> Raw JSON
+    */
+    this.tell(data.name + ', ' + data.email); // Output: Kaan Kilic, email@jovo.tech
 }
 
 
