@@ -75,9 +75,9 @@ app.launch(function(request, response) {
     var launchPromise = getUser2(request);
     launchPromise.then(function(result) {
         console.log("Done");
-        response.say("Hello " + result.body.nickname);
+        response.say("Hello " + result);
         return response.send();
-        resolve(result.body.nickname);
+        resolve(result);
     }, function(err) {
         console.log(err);
     });       
