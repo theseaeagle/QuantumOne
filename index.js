@@ -51,7 +51,7 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
   
-  let token = this.$request.getAccessToken();
+  let token = this.event.session.user.accessToken;
         let options = {
             method: 'GET',
             uri: 'https://quantumone.eu.auth0.com/userinfo', // You can find your URL on Client --> Settings --> 
