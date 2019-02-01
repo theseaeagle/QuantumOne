@@ -49,7 +49,7 @@ db.serialize(function(){
 
 //End Database
 
-app.launch(function(request, response) {
+async app.launch(function(request, response) {
   
   let token = this.event.session.user.accessToken;
         let options = {
@@ -61,7 +61,7 @@ app.launch(function(request, response) {
             }
         };
 
-        await rp(options).then((body) => {
+       rp(options).then((body) => {
             let data = JSON.parse(body);
             /*
             To see how the user data was stored,
