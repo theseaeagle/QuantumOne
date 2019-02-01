@@ -99,11 +99,14 @@ function launch(request,response){
         .then(function (user) {
             console.log('User is: %d ', user.email);
             response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
+            resolve(user.email);
+            
         })
         .catch(function (err) {
             // API call failed...
             console.log('Request Failed');
             response.say('Uh Oh! Something went wrong');
+            reject(err);
         });
         
     })
