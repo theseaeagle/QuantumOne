@@ -90,6 +90,7 @@ app.launch(function(request, response) {
         console.log(response.body);
         //resolve(response.body.nickname);
         return response.body.nickname;
+        resolve(response.body.nickname);
       });
         
     })
