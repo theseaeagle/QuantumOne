@@ -187,7 +187,7 @@ app.intent("lock", {
       "lock my Computer"
     ]
   },
-  function(request, response) {
+  function(request, alexaresponse) {
     var currentDate = new Date().toISOString();;
     db.serialize(function() {
         db.run('UPDATE Dreams SET  dream= "lock", time=strftime("%s","now") WHERE id=1');
@@ -202,7 +202,7 @@ app.intent("lock", {
       .end(function (response) {
         console.log(response.body);
         //resolve(response.body.nickname);
-        response.say("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
+        alexaresponse.say("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
         //return response.body.nickname;
       });
   }
