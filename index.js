@@ -76,7 +76,7 @@ app.launch(function(request, response) {
     launchPromise.then(function(result) {
         console.log("Done");
         response.say("Hello " + result);
-        return response.send();
+        response.send();
         resolve(result);
     }, function(err) {
         console.log(err);
