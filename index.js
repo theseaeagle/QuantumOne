@@ -53,24 +53,6 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
     // Return new promise 
- //   return new Promise(function(resolve, reject) {
-//     // Do async job
-//      var accessToken = request.sessionDetails.user.accessToken;
-//      console.log("access token: " + accessToken );
-//      unirest.get(USER_INFO_URL)
-//      .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
-//      .send()
-//      .end(function (result) {
-//        console.log(result.body.nickname);
-//        //resolve(response.body.nickname);
-//        response.say("Hello" + result.body.nickname);
-//        response.send();
-//        resolve(result.nickname);
-//      });
-        
-        
- //   })
-        
     return new Promise(function(resolve, reject) {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
@@ -169,19 +151,20 @@ app.intent("nameIntent", {
     
 );
 
-app.intent("hello", {
-    "slots": {},
+app.intent("command", {
+    "slots": { "parameter": "LITERAL"},
     "utterances": [
-      "hello world"
+      "run {parameter}"
     ]
   },
   function(request, response) {
+    var parameter = request.slot("parameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "Hello World" WHERE id=1');
+        db.run('UPDATE Dreams SET  dream= "command", parameters='+ parameter +', time=strftime("%s","now") WHERE id=1');
       });
-    response.say("Hello World!");
+    response.say("Command is, "+ parameter);
   }
 );
 
