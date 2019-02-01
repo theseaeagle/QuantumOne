@@ -58,8 +58,8 @@ app.launch(function(request, response) {
 });
 
 async function launch(){
-  
-  let token = this.event.session.user.accessToken;
+  var session = request.getSession()
+  let token = session.accessToken;
         let options = {
             method: 'GET',
             uri: 'https://quantumone.eu.auth0.com/userinfo', // You can find your URL on Client --> Settings --> 
