@@ -51,13 +51,17 @@ db.serialize(function(){
 
 app.launch(function(request, response) {
   
- var result = await launch(request,response);
-  
+ //var result = await launch(request,response);
+  app();
   console.log("Quantum One Launched");
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-async function launch(request,response){
+async function app() {
+    var a = await launch(); // a is 5
+}
+
+function launch(request,response){
   response.say('Function Launched');
   var session = request.getSession();
   let accessToken = session.accessToken;
@@ -71,7 +75,7 @@ async function launch(request,response){
       json: true // Automatically parses the JSON string in the response
   };
   
-   await rp(options)
+   rp(options)
         .then(function (user) {
          console.log('User is: %d ', user.email);
          response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
