@@ -88,8 +88,8 @@ app.launch(function(request, response) {
       .end(function (result) {
         console.log(result.body);
         //resolve(response.body.nickname);
-        response.say(result.body.nickname);
-        resolve(response.body.nickname);
+        response.say(result.nickname);
+        resolve(result.nickname);
       });
         
     })
