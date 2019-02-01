@@ -151,24 +151,7 @@ app.intent("doomsday", {
 );
 
 express_app.get('/', function(request, response) {
-  import { google } from 'googleapis';
-  const googleConfig = {
-    clientId: '34123699345-ju08lhh5kqpl3eova99f28n1pslnntcl.apps.googleusercontent.com', // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
-    clientSecret: 'K1bCh_5dLziJ3KGwfJAUTllE', // e.g. _ASDFA%DFASDFASDFASD#FAD-
-    redirect: 'https://cxalexa.herokuapp.com' // this must match your google api settings
-  };
-
-  /**
-   * Create the google auth object which gives us access to talk to google's apis.
-   */
-  function createConnection() {
-    return new google.auth.OAuth2(
-      googleConfig.clientId,
-      googleConfig.clientSecret,
-      googleConfig.redirect
-    );
-  }
-  
+   
   db.all('SELECT * from Dreams', function(err, rows) {
     response.send(JSON.stringify(rows));
   });
