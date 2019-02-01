@@ -162,7 +162,7 @@ app.intent("command", {
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "command", parameters='+ parameter +', time=strftime("%s","now") WHERE id=1');
+        db.run('UPDATE Dreams SET  dream= "command", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
       });
     response.say("Command is, "+ parameter);
   }
