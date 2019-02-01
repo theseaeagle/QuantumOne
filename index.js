@@ -57,8 +57,8 @@ app.launch(function(request, response) {
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-function launch(request,reponse){
-  var session = request.getSession()
+function launch(request,response){
+  var session = request.getSession();
   let accessToken = session.accessToken;
   let options = {
       method: 'GET',
