@@ -1,6 +1,7 @@
 var express = require("express");
 var alexa = require("alexa-app");
 var rp = require('request-promise');
+var unirest = require('unirest');
 var PORT = process.env.PORT || 3000;
 //var app = express();
 var express_app = express();
@@ -52,23 +53,22 @@ db.serialize(function(){
 app.launch(function(request, response) {
   
  //var result = await launch(request,response);
-  getuser(request,response);
+  gettheUser(request);
   console.log("Quantum One Launched");
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-async function getuser(request,response) {
-    var a = await launch(request,response); // a is 5
+
+function gettheUser(request){
+  var session = request.getSession();
+  let accessToken = session.accessToken;
+  unirest.get('https://quantumone.eu.auth0.com/userinfo/')
+  .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
+  .send()
+  .end(function (response) {
+    console.log(response.body);
+  });
 }
-
-(async() => {
-  const [ profile, token ] = await Promise.all([
-    profileHelper.getUserData(username),
-    tokenHelper.getUserToken(username)
-  ]);
-
-  return { profile, token };
-})();
 
 
 function launch(request,response){
