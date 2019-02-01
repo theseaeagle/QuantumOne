@@ -55,7 +55,8 @@ app.launch(function(request, response) {
     var launchPromise = launch(request, response);
     launchPromise.then(function(result) {
         console.log("Done");
-        return response.say("Hello Boi");
+        response.say("Hello Boi");
+        return response.send();
         //console.log("Done");
         // Use user details from here
         //console.log(userDetails)
