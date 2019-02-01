@@ -86,9 +86,9 @@ app.launch(function(request, response) {
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
       .send()
       .end(function (result) {
-        console.log(result.body);
+        console.log(result.body.nickname);
         //resolve(response.body.nickname);
-        response.say("Hello" + result.nickname);
+        response.say("Hello" + result.body.nickname);
         response.send();
         resolve(result.nickname);
       });
