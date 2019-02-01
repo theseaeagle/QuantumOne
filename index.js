@@ -52,12 +52,12 @@ db.serialize(function(){
 app.launch(function(request, response) {
   
  //var result = await launch(request,response);
-  app();
+  getuser();
   console.log("Quantum One Launched");
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-async function app() {
+async function getuser() {
     var a = await launch(); // a is 5
 }
 
