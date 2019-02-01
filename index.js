@@ -69,7 +69,7 @@ app.launch(function(request, response) {
      exit = true;
   })();
   //gettheUser(request)
-  //do{}while(!exit);
+  do{}while(!exit);
   
   
 });
