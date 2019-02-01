@@ -51,30 +51,31 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
-  
+  var exit = false;
  //var result = await launch(request,response);
 //  await gettheUser(request).then((nickname) => {
 //     console.log("Quantum One Launched");
 //   response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
     
 //   });
-  var exit = false;
+  
   
   (async() => {
-  const [ nickname ] = await Promise.all([
-    gettheUser(request)
-  ]);
-   console.log("Quantum One Launched");
-   response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-    exit = true;
+    const [ nickname ] = await Promise.all([
+      gettheUser(request)
+    ]);
+     console.log("Quantum One Launched");
+     response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
+     exit = true;
   })();
-  
+  gettheUser(request)
   do{}while(!exit);
+  
   
 });
 
 
-async function gettheUser(request){
+function gettheUser(request){
   var accessToken = request.sessionDetails.user.accessToken;
   //let accessToken = session.accessToken;
   //console.log(JSON.stringify(request));
@@ -84,6 +85,7 @@ async function gettheUser(request){
   .send()
   .end(function (response) {
     console.log(response.body);
+    resolve(response.body.nickname);
     return response.body.nickname;
   });
 }
