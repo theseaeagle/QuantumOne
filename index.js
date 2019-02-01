@@ -63,20 +63,21 @@ function launch(request,response){
   let options = {
       method: 'GET',
       url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
-                                                   // Advanced Settings --> Endpoints --> OAuth User Info URL
+      // Advanced Settings --> Endpoints --> OAuth User Info URL
       headers:{
           authorization: 'Bearer ' + accessToken,
       },
       json: true // Automatically parses the JSON string in the response
   };
   
-    rp(options)
+   wait rp(options)
         .then(function (user) {
-         //console.log('User has %d repos', repos.length);
+         console.log('User is: %d ', user.email);
          response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
     })
         .catch(function (err) {
         // API call failed...
+        console.log('Request Failed');
         response.say('Uh Oh! Something went wrong');
     });
 }
