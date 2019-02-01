@@ -278,6 +278,115 @@ app.intent("launchcommand", {
 );
 
 
+app.intent("sendcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "send {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "sendcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Send Command is, "+ parameter);
+  }
+);
+
+
+app.intent("startcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "start {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "startcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Start Command is, "+ parameter);
+  }
+);
+
+
+app.intent("stopcommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "stop {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "stoptcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Stop Command is, "+ parameter);
+  }
+);
+
+
+app.intent("gocommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "go {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "gocommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Go Command is, "+ parameter);
+  }
+);
+
+
+app.intent("mutecommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "go {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "mutecommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Mute Command is, "+ parameter);
+  }
+);
+
+
+app.intent("volumecommand", {
+    "slots": { "parameter": "LITERAL"},
+    "utterances": [
+      "set volume to {parameter}",
+      "set the volume to {parameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("parameter");
+    console.log("Success!" + request.request);
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "volumecommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Volume Command is, "+ parameter);
+  }
+);
+
+
 
 app.intent("shutdown", {
     "slots": {},
