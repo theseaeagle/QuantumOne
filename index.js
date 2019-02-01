@@ -202,7 +202,7 @@ app.intent("lock", {
       .end(function (response) {
         console.log(response.body);
         //resolve(response.body.nickname);
-        alexaresponse.say("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
+        alexaresponse.send("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
         //return response.body.nickname;
       });
   }
