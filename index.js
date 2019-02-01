@@ -51,7 +51,17 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
- launch(request, response);
+    //launch(request, response);
+    var launchPromise = launch();
+    launchPromise.then(function(result) {
+        response.say("Hello Boi");
+        console.log("Done");
+        // Use user details from here
+        console.log(userDetails)
+    }, function(err) {
+        console.log(err);
+    })
+    
 });
 
 
@@ -91,14 +101,14 @@ function launch(request,response){
        rp(options)
         .then(function (user) {
             console.log('User is: %d ', user.email);
-            response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
+            //response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
             resolve(user.email);
             
         })
         .catch(function (err) {
             // API call failed...
             console.log('Request Failed');
-            response.say('Uh Oh! Something went wrong');
+            //response.say('Uh Oh! Something went wrong');
             reject(err);
         });
         
