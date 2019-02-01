@@ -77,7 +77,7 @@ app.launch(function(request, response) {
         console.log("Done");
         response.say("Hello " + result);
         response.send();
-        resolve(result);
+        //resolve(result);
     }, function(err) {
         console.log(err);
     });       
