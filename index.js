@@ -71,16 +71,17 @@ app.launch(function(request, response) {
         
  //   })
         
-
-    var launchPromise = getUser2(request);
-    launchPromise.then(function(result) {
-        console.log("Done");
-        response.say("Hello " + result);
-        response.send();
-        //resolve(result);
-    }, function(err) {
-        console.log(err);
-    });       
+    return new Promise(function(resolve, reject) {
+        var launchPromise = getUser2(request);
+        launchPromise.then(function(result) {
+            console.log("Done");
+            response.say("Hello " + result);
+            response.send();
+            resolve(result);
+        }, function(err) {
+            console.log(err);
+        });
+    });
 });
 
 
