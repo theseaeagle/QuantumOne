@@ -58,6 +58,7 @@ app.launch(function(request, response) {
 });
 
 async function launch(request,response){
+  response.say('Function Launched');
   var session = request.getSession();
   let accessToken = session.accessToken;
   let options = {
