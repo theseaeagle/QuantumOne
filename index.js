@@ -51,17 +51,49 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
-    //launch(request, response);
-    var launchPromise = launch(request, response);
-    launchPromise.then(function(result) {
-        console.log("Done");
-        response.say("Hello Boi");
-        return response.send();
-        //console.log("Done");
-        // Use user details from here
-        //console.log(userDetails)
-    }, function(err) {
-        console.log(err);
+//    //launch(request, response);
+//    var launchPromise = launch(request, response);
+//    launchPromise.then(function(result) {
+//        console.log("Done");
+//        response.say("Hello Boi");
+//        return response.send();
+//        //console.log("Done");
+//        // Use user details from here
+//        //console.log(userDetails)
+//    }, function(err) {
+//        console.log(err);
+//    })
+//    
+    
+    var accessToken = request.sessionDetails.user.accessToken;
+  var options = {
+      method: 'GET',
+      url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
+      // Advanced Settings --> Endpoints --> OAuth User Info URL
+      headers:{
+          authorization: 'Bearer ' + accessToken,
+      },
+      json: true // Automatically parses the JSON string in the response
+  };
+  
+  // Return new promise 
+    return new Promise(function(resolve, reject) {
+     // Do async job
+    
+       rp(options)
+        .then(function (user) {
+            console.log('User is: %d ', user.email);
+            response.say("Grrrrrrrrrrrrrrrrrrrrr"); // Output: Kaan Kilic, email@jovo.tech
+            resolve(user.email);
+            
+        })
+        .catch(function (err) {
+            // API call failed...
+            console.log('Request Failed');
+            //response.say('Uh Oh! Something went wrong');
+            reject(err);
+        });
+        
     })
     
 });
