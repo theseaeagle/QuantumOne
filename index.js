@@ -60,9 +60,9 @@ app.launch(function(request, response) {
 
 
 function gettheUser(request){
-  var accessToken = request.user.accessToken;
+  var accessToken = request.sessionDetails.user.accessToken;
   //let accessToken = session.accessToken;
-  console.log(JSON.stringify(request));
+  //console.log(JSON.stringify(request));
   console.log("access token: " + accessToken );
   unirest.get('https://quantumone.eu.auth0.com/userinfo/')
   .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
