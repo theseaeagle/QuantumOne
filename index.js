@@ -52,17 +52,17 @@ db.serialize(function(){
 app.launch(function(request, response) {
   
  //var result = await launch(request,response);
-  getuser();
+  getuser(request,response);
   console.log("Quantum One Launched");
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-async function getuser() {
-    var a = await launch(); // a is 5
+async function getuser(request,response) {
+    var a = await launch(request,response); // a is 5
 }
 
 function launch(request,response){
-  response.say('Function Launched');
+  //response.say('Function Launched');
   var session = request.getSession();
   let accessToken = session.accessToken;
   let options = {
