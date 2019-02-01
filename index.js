@@ -57,7 +57,7 @@ app.launch(function(request, response) {
   //response.say("Welcome to Quantum One! Quantum One with it's PC client, can control your computer!");
 });
 
-function launch(request,response){
+async function launch(request,response){
   var session = request.getSession();
   let accessToken = session.accessToken;
   let options = {
@@ -70,7 +70,7 @@ function launch(request,response){
       json: true // Automatically parses the JSON string in the response
   };
   
-   wait rp(options)
+   await rp(options)
         .then(function (user) {
          console.log('User is: %d ', user.email);
          response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
