@@ -73,7 +73,6 @@ function gettheUser(request){
 
 function launch(request,response){
   //response.say('Function Launched');
-  var session = request.getSession();
   var accessToken = request.sessionDetails.user.accessToken;
   let options = {
       method: 'GET',
