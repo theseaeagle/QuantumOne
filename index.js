@@ -87,14 +87,7 @@ function launch(request,response){
   // Return new promise 
     return new Promise(function(resolve, reject) {
      // Do async job
-        request.get(options, function(err, resp, body) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(JSON.parse(body));
-            }
-        })
-        
+    
        rp(options)
         .then(function (user) {
             console.log('User is: %d ', user.email);
