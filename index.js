@@ -51,25 +51,7 @@ db.serialize(function(){
 //End Database
 
 app.launch(function(request, response) {
-  var exit = false;
-  var firsttime=true;
- //var result = await launch(request,response);
-//  await gettheUser(request).then((nickname) => {
-//     console.log("Quantum One Launched");
-//   response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-    
-//   });
-
-    (async() => {
-        const [ nickname ] = await Promise.all([
-          gettheUser(request)
-        ]);
-         console.log("Quantum One Launched");
-         response.say("Welcome to Quantum One! " + nickname +" Quantum One with it's PC client, can control your computer!");
-         return response.send();
-         response.shouldEndSession(true);
-      })();
-   response.shouldEndSession(false);
+ launch();
 });
 
 
@@ -92,7 +74,7 @@ function gettheUser(request){
 function launch(request,response){
   //response.say('Function Launched');
   var session = request.getSession();
-  let accessToken = session.accessToken;
+  var accessToken = request.sessionDetails.user.accessToken;
   let options = {
       method: 'GET',
       url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
@@ -103,16 +85,29 @@ function launch(request,response){
       json: true // Automatically parses the JSON string in the response
   };
   
-   rp(options)
+  // Return new promise 
+    return new Promise(function(resolve, reject) {
+     // Do async job
+        request.get(options, function(err, resp, body) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(body));
+            }
+        })
+        
+       rp(options)
         .then(function (user) {
-         console.log('User is: %d ', user.email);
-         response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
-    })
+            console.log('User is: %d ', user.email);
+            response.say(user.name + ', ' + user.email); // Output: Kaan Kilic, email@jovo.tech
+        })
         .catch(function (err) {
-        // API call failed...
-        console.log('Request Failed');
-        response.say('Uh Oh! Something went wrong');
-    });
+            // API call failed...
+            console.log('Request Failed');
+            response.say('Uh Oh! Something went wrong');
+        });
+        
+    })
 }
 
 
