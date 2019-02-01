@@ -54,6 +54,7 @@ app.launch(function(request, response) {
     //launch(request, response);
     var launchPromise = launch(request, response);
     launchPromise.then(function(result) {
+        console.log("Done");
         return response.say("Hello Boi");
         //console.log("Done");
         // Use user details from here
@@ -81,10 +82,10 @@ function gettheUser(request){
 }
 
 
-function launch(request,response){
+async function launch(request,response){
   //response.say('Function Launched');
   var accessToken = request.sessionDetails.user.accessToken;
-  let options = {
+  var options = {
       method: 'GET',
       url: 'https://quantumone.eu.auth0.com/userinfo/', // You can find your URL on Client --> Settings --> 
       // Advanced Settings --> Endpoints --> OAuth User Info URL
