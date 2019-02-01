@@ -60,7 +60,7 @@ app.launch(function(request, response) {
 
 
 function gettheUser(request){
-  var accessToken = request.accessToken;
+  var accessToken = request.user.accessToken;
   //let accessToken = session.accessToken;
   console.log(JSON.stringify(request));
   console.log("access token: " + accessToken );
