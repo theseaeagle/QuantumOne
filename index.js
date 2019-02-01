@@ -62,13 +62,14 @@ function launch(request){
   let accessToken = session.accessToken;
   
   let getUser = (accessToken, userid) => {
-          return requestPromise({
+          request({
               url: 'https://quantumone.eu.auth0.com/userinfo',
               headers: {
                   authorization: 'Bearer ' + token
               }
           });
     }
+  console.log(getUser);
      
     let data = JSON.parse(getUser);
     /*
