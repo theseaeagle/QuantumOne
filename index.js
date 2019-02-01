@@ -196,7 +196,7 @@ app.intent("lock", {
      // response.say("Lock Command Sent");
       var accessToken = request.sessionDetails.user.accessToken;
       console.log("access token: " + accessToken );
-      unirest.get('https://quantumone.eu.auth0.com/userinfo/')
+      return unirest.get('https://quantumone.eu.auth0.com/userinfo/')
       .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
       .send()
       .end(function (response) {
