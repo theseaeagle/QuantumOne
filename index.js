@@ -31,7 +31,7 @@ var db = new sqlite3.Database(dbFile);
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function(){
   if (!exists) {
-    db.run('CREATE TABLE Dreams (id INTEGER PRIMARY KEY, dream TEXT,parameters TEXT, time DATETIME DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE Dreams (id INTEGER PRIMARY KEY, dream TEXT,parameters TEXT,parameter2 TEXT, time DATETIME DEFAULT CURRENT_TIMESTAMP)');
     console.log('New table Dreams created!');
     
     // insert default dreams
@@ -152,13 +152,14 @@ app.intent("nameIntent", {
 );
 
 app.intent("runcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "runparameter": "LITERAL"},
     "utterances": [
-      "run {parameter}"
+      "run {runparameter}",
+      "run the {runparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("runparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -170,13 +171,14 @@ app.intent("runcommand", {
 
 
 app.intent("opencommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "openparameter": "LITERAL"},
     "utterances": [
-      "open {parameter}"
+      "open {openparameter}",
+      "open the {openparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("openparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -188,13 +190,14 @@ app.intent("opencommand", {
 
 
 app.intent("closecommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "closeparameter": "LITERAL"},
     "utterances": [
-      "close {parameter}"
+      "close {closeparameter}",
+      "close the {closeparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("closeparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -207,13 +210,16 @@ app.intent("closecommand", {
 
 
 app.intent("findcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "findparameter": "LITERAL"},
     "utterances": [
-      "find {parameter}"
+      "find {findparameter}",
+      "find the {findparameter}",
+      "search {findparameter}",
+      "search the {findparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("findparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -225,13 +231,14 @@ app.intent("findcommand", {
 
 
 app.intent("deletecommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "deleteparameter": "LITERAL"},
     "utterances": [
-      "delete {parameter}"
+      "delete {deleteparameter}",
+      "delete the {deleteparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("deleteparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -243,17 +250,19 @@ app.intent("deletecommand", {
 
 
 app.intent("setcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "setparameter": "LITERAL", "setparametertwo": "LITERAL"},
     "utterances": [
-      "set {parameter}"
+      "set {setparameter} to {setparametertwo}",
+      "set the {setparameter} to {setparametertwo}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("setparameter");
+    var parametertwo = request.slot("setparametertwo");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'", time=strftime("%s","now") WHERE id=1');
+        db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parameter2 + '", time=strftime("%s","now") WHERE id=1');
       });
     response.say("Set Command is, "+ parameter);
   }
@@ -261,13 +270,14 @@ app.intent("setcommand", {
 
 
 app.intent("launchcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "launchparameter": "LITERAL"},
     "utterances": [
-      "launch {parameter}"
+      "launch {launchparameter}",
+      "launch the {launchparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("launchparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -279,13 +289,14 @@ app.intent("launchcommand", {
 
 
 app.intent("sendcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "sendparameter": "LITERAL"},
     "utterances": [
-      "send {parameter}"
+      "send {sendparameter}",
+      "send the {sendparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("sendparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -297,13 +308,14 @@ app.intent("sendcommand", {
 
 
 app.intent("startcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "startparameter": "LITERAL"},
     "utterances": [
-      "start {parameter}"
+      "start {startparameter}",
+      "start the {startparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("startparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -315,13 +327,16 @@ app.intent("startcommand", {
 
 
 app.intent("stopcommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "stopparameter": "LITERAL"},
     "utterances": [
-      "stop {parameter}"
+      "stop {stopparameter}",
+      "stop the {stopparameter}",
+      "kill {stopparameter}",
+      "kill the {stopparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("stopparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -333,13 +348,14 @@ app.intent("stopcommand", {
 
 
 app.intent("gocommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "goparameter": "LITERAL"},
     "utterances": [
-      "go {parameter}"
+      "go {goparameter}",
+      "go to {goparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("goparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -351,13 +367,14 @@ app.intent("gocommand", {
 
 
 app.intent("mutecommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "muteparameter": "LITERAL"},
     "utterances": [
-      "go {parameter}"
+      "mute {muteparameter}",
+      "mute the {muteparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("muteparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -369,14 +386,14 @@ app.intent("mutecommand", {
 
 
 app.intent("volumecommand", {
-    "slots": { "parameter": "LITERAL"},
+    "slots": { "volumeparameter": "LITERAL"},
     "utterances": [
-      "set volume to {parameter}",
-      "set the volume to {parameter}"
+      "set volume to {volumeparameter}",
+      "set the volume to {volumeparameter}"
     ]
   },
   function(request, response) {
-    var parameter = request.slot("parameter");
+    var parameter = request.slot("volumeparameter");
     console.log("Success!" + request.request);
     var currentDate = new Date();
     db.serialize(function() {
@@ -389,17 +406,35 @@ app.intent("volumecommand", {
 
 
 app.intent("shutdown", {
-    "slots": {},
+    "slots": {"shutdownparameter": "LITERAL"},
     "utterances": [
-      "Shutdown my Computer"
+      "Shutdown {shutdownparameter}"
     ]
   },
   function(request, response) {
+    var parameter = request.slot("shutdownparameter");
     var currentDate = new Date();
     db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "shutdown",time=strftime("%s","now") WHERE id=1');
+        db.run('UPDATE Dreams SET  dream= "shutdown", parameters="'+ parameter +'",time=strftime("%s","now") WHERE id=1');
       });
-    response.say("Shutdown Command Sent");
+    response.say("Shutdown Command Sent to " + parameter);
+  }
+);
+
+
+app.intent("lock", {
+    "slots": {"lockparameter": "LITERAL"},
+    "utterances": [
+      "Lock {lockparameter}"
+    ]
+  },
+  function(request, response) {
+    var parameter = request.slot("lockparameter");
+    var currentDate = new Date();
+    db.serialize(function() {
+        db.run('UPDATE Dreams SET  dream= "shutdown", parameters="'+ parameter +'",time=strftime("%s","now") WHERE id=1');
+      });
+    response.say("Lock Command Sent to " + parameter);
   }
 );
 
@@ -419,33 +454,7 @@ app.intent("sleep", {
   }
 );
 
-app.intent("lock", {
-    "slots": {},
-    "utterances": [
-      "lock the Computer",
-      "lock my Computer"
-    ]
-  },
-  function(request, alexaresponse) {
-    var currentDate = new Date().toISOString();;
-    db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "lock", time=strftime("%s","now") WHERE id=1');
-      });
-  
-     // response.say("Lock Command Sent");
-      var accessToken = request.sessionDetails.user.accessToken;
-      console.log("access token: " + accessToken );
-      return unirest.get('https://quantumone.eu.auth0.com/userinfo/')
-      .headers({'Accept': 'application/json', 'Content-Type': 'application/json','authorization': 'Bearer ' + accessToken})
-      .send()
-      .end(function (response) {
-        console.log(response.body);
-        //resolve(response.body.nickname);
-        alexaresponse.send("Welcome to Quantum One! " + response.body.nickname +" Quantum One with it's PC client, can control your computer!");
-        //return response.body.nickname;
-      });
-  }
-);
+
 
 app.intent("doomsday", {
     "slots": {},
