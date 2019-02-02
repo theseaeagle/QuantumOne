@@ -264,7 +264,7 @@ app.intent("setcommand", {
     return new Promise(function(resolve, reject) {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
-            
+            console.log("Updating Database!");
             updateDB("setcommand",parameter,parametertwo,result.email);
             
             response.say("Set Command is, "+ parameter);
