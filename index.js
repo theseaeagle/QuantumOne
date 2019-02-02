@@ -464,6 +464,24 @@ app.intent("doomsday", {
   }
 );
 
+
+app.intent("play", {
+    "slots": {},
+    "utterances": [
+      "play song"
+    ]
+  },
+  function(request, response) {
+      var stream = {
+            "url": "https://next-song-url",
+
+      };
+    
+     response.audioPlayerPlayStream(String playBehavior, Object stream)
+  }
+);
+
+
 express_app.get('/', function(request, response) {
   user = request.query.email;
   db.all('SELECT * from Dreams WHERE user="'+ user + '"', function(err, rows) {
