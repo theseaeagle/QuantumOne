@@ -524,6 +524,15 @@ express_app.post('/uploadsongs', function(request, response) {
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
         console.log(JSON.stringify(request));
+        
+        form.parse(req, function(err, fields, files) {
+            console.log(err);
+            console.log(fields);
+            console.log(files);
+            console.log("Song is:" + fields.songname);
+          });
+        
+        
         songpath = __dirname + '/songs/' + file.name;
         db.serialize(function() {
           db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ request.songname + '","' + request.artist + '",strftime("%s","now"))');
