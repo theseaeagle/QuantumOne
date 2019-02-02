@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload Your Songs</title>
+    <title>Application Form</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="/static/js/postrequest.js"></script>
 </head>
+ 
 <body>
-<form action="/uploadsongs" enctype="multipart/form-data" method="post">
-    <input type="file" name="upload" multiple>
-    Song Name: <input type="text" name="songname">
-    Artist: <input type="text" name="artist">
-    <input type="submit" value="Upload">
-</form>
+	<div class="container">
+		<h1 >Upload Songs</h1>
+		<div class="col-sm-5">
+		<form method="POST" enctype="multipart/form-data" id="applicationForm">			
+			<div class="form-group">
+			   <label for="songname">Song Name:</label>
+			   <input type="text" class="form-control" id="songname" name="songname">
+			</div>
+			<div class="form-group">
+			   <label for="artist">Artist:</label>
+			   <input type="text" class="form-control" id="artist" name="artist">
+			</div>	
+			<div class="form-group">
+				<label for="song">Resume:</label>
+				<input type="file" class="form-control" id="resume" placeholder="Upload Song"  name="song"></input>
+			</div>
+			<div class="form-group"> 
+			    <div>
+			      <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Application</button>
+				  <button type="reset" class="btn btn-default" id="btnSubmit">Reset</button>
+			    </div>
+			</div>
+		</form>
+		<hr/>
+		<div id="confirmMsg">
+		</div>
+		</div>
+	</div>
 </body>
 </html>
