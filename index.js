@@ -57,7 +57,7 @@ app.launch(function(request, response) {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
             console.log("Done");
-            response.say("Hello " + result);
+            response.say("Hello " + result.nickname + ", welcome to Quantum!");
             response.send();
             resolve(result);
         }, function(err) {
