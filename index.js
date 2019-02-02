@@ -260,17 +260,15 @@ app.intent("setcommand", {
     var parameter = request.slot("setparameter");
     var parametertwo = request.slot("setparametertwo");
   
-           
     // Return new promise 
     return new Promise(function(resolve, reject) {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
             db.serialize(function() {
-            db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=1');
-                  });
-                response.say("Set Command is, "+ parameter);
-              }
-            console.log("Done");
+                db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=1');
+            });
+            response.say("Set Command is, "+ parameter);
+           console.log("Done");
             response.say("Hello " + result);
             response.send();
             resolve(result);
