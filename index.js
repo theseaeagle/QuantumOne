@@ -433,7 +433,7 @@ app.intent("volumecommand", {
 app.intent("shutdown", {
     "slots": {"shutdownparameter": "LITERAL"},
     "utterances": [
-      "Shutdown {shutdownparameter}"
+      "shutdown {shutdownparameter}"
     ]
   },
   function(request, response) {
