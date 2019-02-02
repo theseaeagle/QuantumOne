@@ -474,7 +474,7 @@ app.intent("playcommand", {
   function(request, response) {
 
     var stream = {
-    "url": __dirname + "/songs/NoTearsLeftToCry.mp3",
+    "url": __dirname + "/songs",
     "token": "some_token",
     "expectedPreviousToken": "some_previous_token",
     "offsetInMilliseconds": 0
