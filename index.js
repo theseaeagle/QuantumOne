@@ -265,8 +265,16 @@ app.intent("setcommand", {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
             db.serialize(function() {
-                db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2');
+                var sql = 'UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2';
+                //db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2');
+                db.run(sql, , function(err) {
+                  if (err) {
+                    console.error(err.message);
+                  }
+                  console.log(`Row(s) updated: ${this.changes}`);
+                });
             });
+            
             response.say("Set Command is, "+ parameter);
             console.log("Done");
             response.say("Hello " + result);
