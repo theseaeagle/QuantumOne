@@ -474,14 +474,14 @@ app.intent("playcommand", {
   function(request, response) {
 
     var stream = {
-    "url": __dirname + "/songs",
+    "url": "https://quantumone.herokuapp.com/songs",
     "token": "some_token",
     "expectedPreviousToken": "some_previous_token",
     "offsetInMilliseconds": 0
   };
     
-     var a = response.audioPlayerPlayStream("REPLACE_ALL", stream);
-    console.log(a);
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    //console.log(a);
   }
 );
 
