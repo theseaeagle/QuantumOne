@@ -276,7 +276,7 @@ app.intent("setcommand", {
             console.log(err);
         });
     });
-);
+});
 
 
 app.intent("launchcommand", {
