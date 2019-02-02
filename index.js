@@ -513,17 +513,17 @@ express_app.get('/uploadsongs', function(request, response) {
 express_app.post('/uploadsongs', function(request, response) {
   var formidable = require('formidable');
   var form = new formidable.IncomingForm();
-  var filename="";
+  //var filename="";
     form.parse(request);
     form.on('fileBegin', function (name, file){
         file.path = __dirname + '/songs/' + file.name;
-        filename=file.path;
+        //filename=file.path;
     });
     
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
-        songpath = filepath;
+        songpath = __dirname + '/songs/' + file.name;
         db.serialize(function() {
           db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ request.songname + '","' + request.artist + '",strftime("%s","now"))');
         });
