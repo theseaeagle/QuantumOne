@@ -523,7 +523,6 @@ express_app.post('/uploadsongs', function(request, response) {
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
-        console.log(JSON.stringify(request));
         
         form.parse(req, function(err, fields, files) {
             console.log(err);
