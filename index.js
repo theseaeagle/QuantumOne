@@ -465,7 +465,7 @@ app.intent("doomsday", {
 );
 
 
-app.intent("play", {
+app.intent("playcommand", {
     "slots": {},
     "utterances": [
       "play song"
@@ -473,11 +473,10 @@ app.intent("play", {
   },
   function(request, response) {
       var stream = {
-            "url": "https://next-song-url",
-
+            "url": __dirname + '/songs/NoTearsLeftToCry.mp3'
       };
     
-     response.audioPlayerPlayStream(String playBehavior, Object stream)
+     response.audioPlayerPlayStream(REPLACE_ALL, stream);
   }
 );
 
