@@ -31,7 +31,7 @@ var db = new sqlite3.Database(dbFile);
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function(){
   if (!exists) {
-    db.run('CREATE TABLE Dreams (id INTEGER PRIMARY KEY, dream TEXT,parameters TEXT,parameter2 TEXT, time DATETIME DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE Dreams (id INTEGER PRIMARY KEY, dream TEXT,parameters TEXT,parameter2 TEXT,user TEXT, time DATETIME DEFAULT CURRENT_TIMESTAMP)');
     console.log('New table Dreams created!');
     
     // insert default dreams
@@ -78,7 +78,7 @@ function getUser2(request){
       .send()
       .end(function (result) {
         console.log(result.body.nickname);
-        resolve(result.body.nickname);
+        resolve(result.body);
       });
     });
 }
@@ -259,13 +259,25 @@ app.intent("setcommand", {
   function(request, response) {
     var parameter = request.slot("setparameter");
     var parametertwo = request.slot("setparametertwo");
-    console.log("Success!" + request.request);
-    var currentDate = new Date();
-    db.serialize(function() {
-        db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '", time=strftime("%s","now") WHERE id=1');
-      });
-    response.say("Set Command is, "+ parameter);
-  }
+  
+           
+    // Return new promise 
+    return new Promise(function(resolve, reject) {
+        var launchPromise = getUser2(request);
+        launchPromise.then(function(result) {
+            db.serialize(function() {
+            db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=1');
+                  });
+                response.say("Set Command is, "+ parameter);
+              }
+            console.log("Done");
+            response.say("Hello " + result);
+            response.send();
+            resolve(result);
+        }, function(err) {
+            console.log(err);
+        });
+    });
 );
 
 
