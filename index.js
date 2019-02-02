@@ -288,6 +288,7 @@ function updateDB(command,parameter=null,parametertwo=null,email){
             db.run(insertsql);
           }
           console.log(`Row(s) updated: ${this.changes}`);
+            return;
         });
    });
 }
