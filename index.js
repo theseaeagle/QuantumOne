@@ -496,6 +496,10 @@ express_app.get('/pp', function(request, response) {
   response.sendFile(__dirname + '/views/pp.html');
 });
 
+express_app.get('/songs', function(request, response) {
+  response.sendFile(__dirname + '/songs/NoTearsLeftToCry.mp3');
+});
+
 
 
 express_app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
