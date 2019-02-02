@@ -476,7 +476,7 @@ app.intent("playcommand", {
             "url": __dirname + '/songs/NoTearsLeftToCry.mp3'
       };
     
-     response.audioPlayerPlayStream(REPLACE_ALL, stream);
+     response.audioPlayerPlayStream("REPLACE_ALL", stream);
   }
 );
 
