@@ -284,7 +284,7 @@ function updateDB(command,parameter=null,parametertwo=null,email){
         db.run(updatesql,function(err) { 
           if (err || this.changes==0) {
             //console.error(err.message);
-            var insertsql = 'INSERT Dreams (dream,parameters,parameter2,user)  VALUES("' + command + '", "' + parameter + '","' + parametertwo + '","' + email + '", strftime("%s","now")) WHERE user="'+ email +'"';
+            var insertsql = 'INSERT INTO Dreams(dream,parameters,parameter2,user)  VALUES("' + command + '", "' + parameter + '","' + parametertwo + '","' + email + '", strftime("%s","now")) WHERE user="'+ email +'"';
             db.run(insertsql);
           }
           console.log(`Row(s) updated: ${this.changes}`);
