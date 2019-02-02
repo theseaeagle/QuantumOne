@@ -267,7 +267,7 @@ app.intent("setcommand", {
             db.serialize(function() {
                 var sql = 'UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2';
                 //db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2');
-                db.run(sql, , function(err) {
+                db.run(sql,function(err) {
                   if (err) {
                     console.error(err.message);
                   }
