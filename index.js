@@ -475,8 +475,7 @@ app.intent("playcommand", {
 
     var stream = {
     "url": "https://quantumone.herokuapp.com/songs",
-    "token": "some_token",
-    "expectedPreviousToken": "some_previous_token",
+    "token": "dfgdfgdfgfdgdfgdfgdfgdfgdfgdfgdfgdfgdgdgdgdgdgd",
     "offsetInMilliseconds": 0
   };
     
