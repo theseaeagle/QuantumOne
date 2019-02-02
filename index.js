@@ -471,6 +471,14 @@ express_app.get('/', function(request, response) {
   });
 });
 
+express_app.get('/tos', function(request, response) {
+  response.sendFile('tos.html');
+});
+
+express_app.get('/pp', function(request, response) {
+  response.sendFile('pp.html');
+});
+
 
 
 express_app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
