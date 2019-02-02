@@ -511,9 +511,9 @@ express_app.get('/uploadsongs', function(request, response) {
 });
 
 express_app.post('/uploadsongs', function(request, response) {
+  var formidable = require('formidable');
   var form = new formidable.IncomingForm();
     form.parse(request);
-
     form.on('fileBegin', function (name, file){
         file.path = __dirname + '/songs/' + file.name;
     });
