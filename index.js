@@ -480,7 +480,8 @@ app.intent("playcommand", {
     "offsetInMilliseconds": 0
   };
     
-     response.audioPlayerPlayStream("REPLACE_ALL", stream);
+     var a = response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    console.log(a);
   }
 );
 
