@@ -472,11 +472,11 @@ express_app.get('/', function(request, response) {
 });
 
 express_app.get('tos', function(request, response) {
-  response.sendFile('./views/tos.html');
+  response.sendFile(__dirname + '/views/tos.html');
 });
 
 express_app.get('/pp', function(request, response) {
-  response.sendFile('./views/pp.html');
+  response.sendFile(__dirname + '/views/pp.html');
 });
 
 
