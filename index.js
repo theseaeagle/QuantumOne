@@ -518,7 +518,7 @@ express_app.post('/uploadsongs', function(request, response) {
         file.path = __dirname + '/songs/' + file.name;
     });
     
-    songpath = __dirname + '/songs/' + form.file.name;
+    songpath = __dirname + '/songs/' + form.on.file.name;
     db.serialize(function() {
       db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ form.songname + '","' + form.artist + '",strftime("%s","now"))');
     });
