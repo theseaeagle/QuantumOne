@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Your Songs</title>
+</head>
+<body>
+<form action="/songupload" enctype="multipart/form-data" method="post">
+    <input type="file" name="upload" multiple>
+    Song Name: <input type="text" name="songname">
+    Artist: <input type="text" name="artist">
+    <input type="submit" value="Upload">
+</form>
+</body>
+</html>

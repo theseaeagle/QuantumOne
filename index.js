@@ -32,6 +32,7 @@ var db = new sqlite3.Database(dbFile);
 db.serialize(function(){
   if (!exists) {
     db.run('CREATE TABLE Dreams (id INTEGER PRIMARY KEY, dream TEXT,parameters TEXT,parameter2 TEXT,user TEXT, time DATETIME DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE Songs (id INTEGER PRIMARY KEY, songpath TEXT,songname TEXT, artist TEXT,time DATETIME DEFAULT CURRENT_TIMESTAMP)');
     console.log('New table Dreams created!');
     
     // insert default dreams
@@ -504,6 +505,33 @@ express_app.get('/songs', function(request, response) {
   response.sendFile(__dirname + '/songs/NoTearsLeftToCry.mp3');
 });
 
+
+express_app.get('/uploadsongs', function(request, response) {
+  response.sendFile(__dirname + '/managesongs/managesongs.html');
+});
+
+express_app.post('/uploadsongs', function(request, response) {
+  var form = new formidable.IncomingForm();
+    form.parse(request);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/songs/' + file.name;
+    });
+    
+    songpath = __dirname + '/songs/' + form.file.name;
+    db.serialize(function() {
+      db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ form.songname + '","' + form.artist + '",strftime("%s","now"))');
+    });
+    
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+        db.all('SELECT * from Songs', function(err, rows) {
+            console.log(JSON.stringify(rows));
+         });
+    });
+
+});
 
 
 express_app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
