@@ -531,10 +531,22 @@ express_app.post('/uploadsongs', function(request, response) {
             console.log("Song is:" + fields.songname);
           });
         
+        form.on('field', function(tempsongname, field) {
+            console.log('Got a field:', tempsongname);
+            var songname = tempsongname;
+        });
+        
+        form.on('field', function(tempartist, field) {
+            console.log('Got a field:', tempartist);
+            var artist = temartist;
+        });
+        
+        
+        
         
         songpath = __dirname + '/songs/' + file.name;
         db.serialize(function() {
-          db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ request.songname + '","' + request.artist + '",strftime("%s","now"))');
+          db.run('INSERT INTO Songs (songpath,songname,artist,time) VALUES ("' + songpath + '","'+ songname + '","' + artist + '",strftime("%s","now"))');
         });
         
         db.all('SELECT * from Songs', function(err, rows) {
