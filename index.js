@@ -264,20 +264,12 @@ app.intent("setcommand", {
     return new Promise(function(resolve, reject) {
         var launchPromise = getUser2(request);
         launchPromise.then(function(result) {
-            db.serialize(function() {
-                var sql = 'UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2';
-                //db.run('UPDATE Dreams SET  dream= "setcommand", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + result.email + '", time=strftime("%s","now") WHERE id=2');
-                db.run(sql,function(err) {
-                  if (err) {
-                    console.error(err.message);
-                  }
-                  console.log(`Row(s) updated: ${this.changes}`);
-                });
-            });
+            
+            updateDB("setcommand",parameter,parametertwo,result.email);
             
             response.say("Set Command is, "+ parameter);
             console.log("Done");
-            response.say("Hello " + result);
+            response.say("Hello " + result.email);
             response.send();
             resolve(result);
         }, function(err) {
@@ -285,6 +277,20 @@ app.intent("setcommand", {
         });
     });
 });
+
+function updateDB(command,parameter=null,parametertwo=null,email){
+    db.serialize(function() {
+        var updatesql = 'UPDATE Dreams SET  dream="' + command + '", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + email + '", time=strftime("%s","now") WHERE user="' + email + '"';
+        db.run(updatesql,function(err) { 
+          if (err || this.changes==0) {
+            console.error(err.message);
+            var insertsql = 'INSERT Dreams (dream,parameters,parameter2,user)  VALUES("' + command + '", "' + parameter + '","' + parametertwo + '","' + email + '", strftime("%s","now")) WHERE user="'+ email +'"';
+            db.run(insertsql);
+          }
+          console.log(`Row(s) updated: ${this.changes}`);
+        });
+   });
+}
 
 
 app.intent("launchcommand", {
