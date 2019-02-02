@@ -283,7 +283,7 @@ function updateDB(command,parameter=null,parametertwo=null,email){
         var updatesql = 'UPDATE Dreams SET  dream="' + command + '", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + email + '", time=strftime("%s","now") WHERE user="' + email + '"';
         db.run(updatesql,function(err) { 
           if (err || this.changes==0) {
-            console.error(err.message);
+            //console.error(err.message);
             var insertsql = 'INSERT Dreams (dream,parameters,parameter2,user)  VALUES("' + command + '", "' + parameter + '","' + parametertwo + '","' + email + '", strftime("%s","now")) WHERE user="'+ email +'"';
             db.run(insertsql);
           }
