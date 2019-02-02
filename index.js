@@ -496,8 +496,8 @@ app.intent("doomsday", {
 );
 
 express_app.get('/', function(request, response) {
-   
-  db.all('SELECT * from Dreams', function(err, rows) {
+  user = req.query.email;
+  db.all('SELECT * from Dreams WHERE user="'+ user + '"', function(err, rows) {
     response.send(JSON.stringify(rows));
   });
 });
