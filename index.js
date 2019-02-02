@@ -471,7 +471,7 @@ express_app.get('/', function(request, response) {
   });
 });
 
-express_app.get('tos', function(request, response) {
+express_app.get('/tos', function(request, response) {
   response.sendFile(__dirname + '/views/tos.html');
 });
 
