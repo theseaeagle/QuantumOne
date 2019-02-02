@@ -523,7 +523,8 @@ express_app.post('/uploadsongs', function(request, response) {
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
-        
+        var songname = "";
+        var artist ="";
         form.parse(request, function(err, fields, files) {
             console.log(err);
             console.log(fields);
@@ -533,12 +534,12 @@ express_app.post('/uploadsongs', function(request, response) {
         
         form.on('field', function(tempsongname, field) {
             console.log('Got a field:', tempsongname);
-            var songname = tempsongname;
+            songname = tempsongname;
         });
         
         form.on('field', function(tempartist, field) {
             console.log('Got a field:', tempartist);
-            var artist = temartist;
+            artist = temartist;
         });
         
         
