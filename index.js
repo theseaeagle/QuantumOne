@@ -246,7 +246,7 @@ app.intent("setcommand", {
     });
 });
 
-function updateDB(command,parameter=null,parametertwo=null,email){
+function updateDB(command,parameter,parametertwo,email){
     db.serialize(function() {
         var updatesql = 'UPDATE Dreams SET  dream="' + command + '", parameters="'+ parameter +'",parameter2="' + parametertwo + '",user="' + email + '", time=strftime("%s","now") WHERE user="' + email + '"';
         db.run(updatesql,function(err) { 
@@ -255,7 +255,7 @@ function updateDB(command,parameter=null,parametertwo=null,email){
             var insertsql = 'INSERT INTO Dreams(dream,parameters,parameter2,user,time)  VALUES("' + command + '", "' + parameter + '","' + parametertwo + '","' + email + '", strftime("%s","now"))';
             db.run(insertsql);
           }
-          console.log(`Row(s) updated: ${this.changes}`);
+            console.log('Row(s) updated: ${this.changes}');
             return;
         });
    });
