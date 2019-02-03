@@ -526,7 +526,7 @@ express_app.post('/uploadsongs', function(request, response) {
     });
     
 
-    form.on('file', function (name, file){
+    form.on('file', function (name, fields,file){
         console.log('Uploaded ' + file.name);
         var songname = fields.songname;
         var artist =fields.artist;
