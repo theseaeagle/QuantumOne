@@ -515,8 +515,8 @@ express_app.post('/uploadsongs', function(request, response) {
   var form = new formidable.IncomingForm();
   //var filename="";
     //form.parse(request);
-    form.parse(req, function(err, fields, files) {
-  
+    form.parse(request, function(err, fields, files) {
+        console.log(fields);
     });
     
     
@@ -530,13 +530,13 @@ express_app.post('/uploadsongs', function(request, response) {
         console.log('Uploaded ' + file.name);
         var songname = "";
         var artist ="";
-        form.parse(request, function(err, fields, file) {
-            console.log(err);
-            console.log(fields);
-            console.log(file);
-            console.log("Song is:" + fields.songname);
-          });
-        
+//        form.parse(request, function(err, fields, file) {
+//            console.log(err);
+//            console.log(fields);
+//            console.log(file);
+//            console.log("Song is:" + fields.songname);
+//          });
+//        
 //        form.on('field', function(tempsongname, field) {
 //            console.log('Got a field:', tempsongname);
 //            songname = tempsongname;
