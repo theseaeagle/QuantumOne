@@ -528,25 +528,9 @@ express_app.post('/uploadsongs', function(request, response) {
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
-        var songname = "";
-        var artist ="";
-//        form.parse(request, function(err, fields, file) {
-//            console.log(err);
-//            console.log(fields);
-//            console.log(file);
-//            console.log("Song is:" + fields.songname);
-//          });
-//        
-//        form.on('field', function(tempsongname, field) {
-//            console.log('Got a field:', tempsongname);
-//            songname = tempsongname;
-//        });
-//        
-//        form.on('field', function(tempartist, field) {
-//            console.log('Got a field:', tempartist);
-//            artist = temartist;
-//        });
-        
+        var songname = fields.songname;
+        var artist =fields.artist;
+
 
         
         songpath = __dirname + '/songs/' + file.name;
@@ -556,6 +540,7 @@ express_app.post('/uploadsongs', function(request, response) {
         
         db.all('SELECT * from Songs', function(err, rows) {
             console.log(JSON.stringify(rows));
+            return (JSON.stringify(rows));
          });
     });
 
