@@ -514,7 +514,12 @@ express_app.post('/uploadsongs', function(request, response) {
   var formidable = require('formidable');
   var form = new formidable.IncomingForm();
   //var filename="";
-    form.parse(request);
+    //form.parse(request);
+    form.parse(req, function(err, fields, files) {
+  
+    });
+    
+    
     form.on('fileBegin', function (name, file){
         file.path = __dirname + '/songs/' + file.name;
         //filename=file.path;
@@ -525,25 +530,24 @@ express_app.post('/uploadsongs', function(request, response) {
         console.log('Uploaded ' + file.name);
         var songname = "";
         var artist ="";
-        form.parse(request, function(err, fields, files) {
+        form.parse(request, function(err, fields, file) {
             console.log(err);
             console.log(fields);
-            console.log(files);
+            console.log(file);
             console.log("Song is:" + fields.songname);
           });
         
-        form.on('field', function(tempsongname, field) {
-            console.log('Got a field:', tempsongname);
-            songname = tempsongname;
-        });
+//        form.on('field', function(tempsongname, field) {
+//            console.log('Got a field:', tempsongname);
+//            songname = tempsongname;
+//        });
+//        
+//        form.on('field', function(tempartist, field) {
+//            console.log('Got a field:', tempartist);
+//            artist = temartist;
+//        });
         
-        form.on('field', function(tempartist, field) {
-            console.log('Got a field:', tempartist);
-            artist = temartist;
-        });
-        
-        
-        
+
         
         songpath = __dirname + '/songs/' + file.name;
         db.serialize(function() {
